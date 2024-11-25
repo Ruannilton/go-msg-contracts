@@ -11,6 +11,27 @@ type EmailContent struct {
 	Body     string `json:"body"`
 }
 
+func NewEmailMessage(receiver string, subject string, body string) (Message, error) {
+	content := EmailContent{
+		Receiver: receiver,
+		Subject:  subject,
+		Body:     body,
+	}
+
+	data, err := json.Marshal(content)
+
+	if err != nil {
+		return Message{}, err
+	}
+
+	msg := Message{
+		Type:    MessageTypeSMS,
+		Content: string(data),
+	}
+
+	return msg, nil
+}
+
 func NewEmailContentFromMessage(msg Message) (EmailContent, error) {
 	if msg.Type != MessageTypeEmail {
 		return EmailContent{}, fmt.Errorf("message is not email type")

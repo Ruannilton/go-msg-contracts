@@ -1,3 +1,3 @@
-module github.com/Ruannilton/restorant-msg-contracts
+module github.com/Ruannilton/go-msg-contracts
 
 go 1.23.0
